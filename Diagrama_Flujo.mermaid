@@ -1,0 +1,19 @@
+flowchart TD
+    A[Inicio] --> B[HAL_Init]
+    B --> C[SystemClock_Config]
+    C --> D[MX_GPIO_Init]
+    D --> E[MX_USART2_UART_Init]
+    E --> F[Inicialización de módulos de usuario]
+    F --> G[Mensaje: Sistema listo]
+    G --> H{Tecla presionada?}
+    H -- No --> H
+    H -- Sí --> I[Guardar tecla en buffer]
+    I --> J{Clave completa?}
+    J -- No --> H
+    J -- Sí --> K[Verificar clave]
+    K --> L{Clave correcta?}
+    L -- Sí --> M[Encender LED 3s y mensaje OK]
+    L -- No --> N[Parpadear LED 3s y mensaje error]
+    M --> O[Reiniciar buffer]
+    N --> O
+    O --> H
